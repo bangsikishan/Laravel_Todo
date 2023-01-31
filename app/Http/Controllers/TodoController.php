@@ -15,20 +15,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        // return view('index', [
-        //     'todos' => Todo::latest()->paginate(8);
-        // ]);
-        return view('index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // 
+        return view('index', [
+            'todos' => Todo::latest()->paginate(8)
+        ]);
     }
 
     /**
@@ -44,21 +33,6 @@ class TodoController extends Controller
         Todo::create($todo);
 
         return redirect('/');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $todo = Todo::findOrFail($id);
-
-        return view('show', [
-            'todo' => $todo
-        ]);
     }
 
     /**
@@ -87,7 +61,7 @@ class TodoController extends Controller
     {
         $todo = $request->validated();
 
-        Todo::where('id', $id)->update();
+        Todo::where('id', $id)->update($todo);
 
         return redirect('/');
     }
@@ -101,5 +75,7 @@ class TodoController extends Controller
     public function destroy($id)
     {
         Todo::where('id', $id)->delete();
+
+        return redirect('/');
     }
 }

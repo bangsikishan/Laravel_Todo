@@ -1,7 +1,7 @@
 <x-layout>
     <div id="main">
         <div class="table">
-            <x-table />
+            <x-table :todos='$todos' />
         </div>
         <div class="form">
             <x-form />
