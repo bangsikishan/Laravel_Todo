@@ -11,10 +11,16 @@
     </div>
     <div id="links" class="">
         <ul>
-            <li><a href="{{ route('todo.index') }}">Home</a></li>
-            <li><a href="#">Logout</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Register</a></li>
+            @auth
+                <li><a href="{{ route('todo.index') }}">Home</a></li>
+                <form action="{{ route('auth.logout') }}" method="POST" class="logout">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>
+            @else
+                <li><a href="{{ route('login') }}">Login</a></li>
+                <li><a href="{{ route('register') }}">Register</a></li>
+            @endauth
         </ul>
     </div>
 </div>
