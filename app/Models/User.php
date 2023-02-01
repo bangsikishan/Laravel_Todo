@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -41,4 +42,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Mutator to encrypt password before storing in the database
+     */
+    public function password(): Attribute
+    {
+        return new Attribute(
+            set: fn ($value) => bcrypt($value),
+        );
+    }
+
+    /**
+     * Relationship between a user and todos
+     */
+    public function todos()
+    {
+        return $this->hasMany(Todo::class);
+    }
 }
