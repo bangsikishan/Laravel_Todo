@@ -16,7 +16,7 @@ class TodoController extends Controller
     public function index()
     {
         return view('index', [
-            'todos' => Todo::latest()->paginate(8)
+            'todos' => Todo::where('user_id', auth()->id())->latest()->paginate(8)
         ]);
     }
 
@@ -29,6 +29,8 @@ class TodoController extends Controller
     public function store(TodoRequest $request)
     {
         $todo = $request->validated();
+
+        $todo['user_id'] = auth()->id();
         
         Todo::create($todo);
 
@@ -60,6 +62,8 @@ class TodoController extends Controller
     public function update(TodoRequest $request, $id)
     {
         $todo = $request->validated();
+
+        $todo['user_id'] = auth()->id();
 
         Todo::where('id', $id)->update($todo);
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthPageController;
 
 /*
@@ -28,3 +29,9 @@ Route::delete('/todo/delete/{id}', [TodoController::class, 'destroy'])->name('to
 Route::get('/login', [AuthPageController::class, 'login'])->name('login')->middleware('guest');
 
 Route::get('/register', [AuthPageController::class, 'register'])->name('register')->middleware('guest');
+
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login')->middleware('guest');
+
+Route::post('/register', [AuthController::class, 'register'])->name('auth.register')->middleware('guest');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware('auth');

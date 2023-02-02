@@ -12,6 +12,7 @@
     <div id="links" class="">
         <ul>
             @auth
+                <li>Welcome, {{ auth()->user()->name }}</li>
                 <li><a href="{{ route('todo.index') }}">Home</a></li>
                 <form action="{{ route('auth.logout') }}" method="POST" class="logout">
                     @csrf

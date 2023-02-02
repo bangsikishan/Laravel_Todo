@@ -247,9 +247,15 @@ th, td {
     min-height: calc(100vh - 200px);
 }
 
-.login-form input, 
-.register-form input {
+.login-form div, 
+.register-form div {
     margin-bottom: 18px;
+}
+
+.login-form .error, 
+.register-form .error {
+    color: red;
+    font-size: 14px;
 }
 
 /* register */

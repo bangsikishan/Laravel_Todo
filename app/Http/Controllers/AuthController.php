@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function login(LoginStoreRequest $request)
     {
         $loginDetails = $request->validated();
-
+        
         if (Auth::attempt($loginDetails)) {
             $request->session()->regenerate();
 
@@ -23,7 +23,6 @@ class AuthController extends Controller
         return back()
             ->withFail('Invalid Credentials!')
             ->onlyInput('email');
-        
     }
 
     public function register(RegisterStoreRequest $request)
